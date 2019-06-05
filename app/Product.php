@@ -11,9 +11,14 @@ class Product extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'description','activated'];
     protected $appends = ['resume_title'];
     protected $hidden = ['title'];
+
+    protected $dispatchesEvents = [
+      'created' => \App\Events\ProductsCreated::class,
+      'creating' => \App\Events\ProductsCreating::class,
+    ];
 
     protected static function boot(){
         parent::boot();
