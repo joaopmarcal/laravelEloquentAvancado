@@ -16,7 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return new ProductsResource(Product::all());
+        //Product::find(2)->delete();
+        return new ProductsResource(Product::onlyTrashed()->get());
     }
 
     /**
