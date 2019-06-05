@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Scopes\ActivatedScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
@@ -12,6 +14,12 @@ class Product extends Model
     protected $fillable = ['title', 'description'];
     protected $appends = ['resume_title'];
     protected $hidden = ['title'];
+
+    protected static function boot(){
+        parent::boot();
+
+        static::addGlobalScope(new ActivatedScope);
+    }
 
     public function getResumeTitleAttribute(){
         if (isset($this->attributes['title'][3])){

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Scopes\ActivatedScope;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Resources\Product as ProductResource;
@@ -17,7 +18,8 @@ class ProductController extends Controller
     public function index()
     {
         //Product::find(2)->delete();
-        return new ProductsResource(Product::onlyTrashed()->get());
+        return new ProductsResource(Product::withoutGlobalScope(ActivatedScope::class)->get());
+        //return new ProductsResource(Product::all());
     }
 
     /**

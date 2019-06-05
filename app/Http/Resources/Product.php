@@ -19,6 +19,7 @@ class Product extends JsonResource
             'identify' => $this->id,
             'title' => $this->title,
             'body' => $this->description,
+            'activated' => $this->activated,
             'deleted' => $deleted,
             'created' => $this->created_at,
             'updated' => $this->updated_at,
